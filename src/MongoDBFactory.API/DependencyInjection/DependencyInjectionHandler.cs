@@ -20,5 +20,7 @@ internal static class DependencyInjectionHandler
         services.AddScoped(m => m.GetRequiredService<IMongoClient>().GetDatabase(mongoDb.DatabaseName));
 
         services.AddRepositoriesDependencyInjection();
+        services.AddMappersDependencyInjection();
+        services.AddServicesDependencyInjection();
     }
 }

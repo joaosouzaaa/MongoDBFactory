@@ -14,8 +14,6 @@
 
 	<ItemGroup>
 		<Folder Include="Controllers\" />
-		<Folder Include="DataTransferObjects\Movies\" />
-		<Folder Include="DataTransferObjects\Directors\" />
 		<Folder Include="Interfaces\Services\" />
 		<Folder Include="Mappers\" />
 		<Folder Include="Validators\" />

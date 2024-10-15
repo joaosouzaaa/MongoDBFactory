@@ -42,7 +42,8 @@ public sealed class NotificationFilterTests
         _notificationFilter.OnActionExecuted(context);
 
         // A
-        _notificationHandlerMock.Verify(n => n.GetNotifications(), Times.Never());
+        _notificationHandlerMock.Verify(n => n.GetNotifications(), 
+            Times.Never());
 
         Assert.Null(context.Result);
     }
@@ -80,7 +81,8 @@ public sealed class NotificationFilterTests
         _notificationFilter.OnActionExecuted(context);
 
         // A
-        _notificationHandlerMock.Verify(n => n.GetNotifications(), Times.Once());
+        _notificationHandlerMock.Verify(n => n.GetNotifications(), 
+            Times.Once());
 
         var contextResult = context.Result;
         Assert.NotNull(contextResult);

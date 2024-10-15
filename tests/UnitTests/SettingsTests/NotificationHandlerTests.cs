@@ -33,7 +33,9 @@ public sealed class NotificationHandlerTests
     public void HasNotifications_AddNotification_HasNotificationTrue()
     {
         // A
-        _notificationHandler.AddNotification(_random.Word(), _random.Word());
+        _notificationHandler.AddNotification(
+            _random.Word(), 
+            _random.Word());
 
         // A
         var hasNotificationsResult = _notificationHandler.HasNotifications();
@@ -54,7 +56,9 @@ public sealed class NotificationHandlerTests
     {
         for (var i = 0; i < range; i++)
         {
-            _notificationHandler.AddNotification(_random.Word(), _random.Word());
+            _notificationHandler.AddNotification(
+                _random.Word(), 
+                _random.Word());
         }
     }
 }
