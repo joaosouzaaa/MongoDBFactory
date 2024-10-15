@@ -1,10 +1,11 @@
 using MongoDBFactory.API.Constants;
 using MongoDBFactory.API.DependencyInjection;
+using MongoDBFactory.API.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.AddService<NotificationFilter>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDependencyInjection(configuration);
