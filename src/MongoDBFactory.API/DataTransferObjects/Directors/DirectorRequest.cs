@@ -2,5 +2,5 @@
 
 public sealed record DirectorRequest(
     string Name,
-    DateTime DateOfBirth,
+    DateTime BirthDate,
     string Nationality);

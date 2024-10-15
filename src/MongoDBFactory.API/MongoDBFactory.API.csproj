@@ -16,7 +16,6 @@
 		<Folder Include="Controllers\" />
 		<Folder Include="Interfaces\Services\" />
 		<Folder Include="Mappers\" />
-		<Folder Include="Validators\" />
 		<Folder Include="Services\" />
 	</ItemGroup>
 

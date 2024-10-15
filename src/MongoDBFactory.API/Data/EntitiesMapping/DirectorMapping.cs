@@ -14,9 +14,9 @@ public sealed class DirectorMapping : BaseEntityMapping<Director>
             .SetIsRequired(true)
             .SetElementName("name");
 
-        classMap.MapProperty(d => d.DateOfBirth)
+        classMap.MapProperty(d => d.BirthDate)
             .SetIsRequired(true)
-            .SetElementName("date_of_birth");
+            .SetElementName("birth_date");
 
         classMap.MapProperty(d => d.Nationality)
             .SetIsRequired(true)
