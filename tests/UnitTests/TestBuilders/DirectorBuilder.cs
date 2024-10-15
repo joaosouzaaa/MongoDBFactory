@@ -1,4 +1,5 @@
-﻿using MongoDBFactory.API.Entities;
+﻿using MongoDBFactory.API.DataTransferObjects.Directors;
+using MongoDBFactory.API.Entities;
 
 namespace UnitTests.TestBuilders;
 
@@ -18,6 +19,16 @@ public sealed class DirectorBuilder
             Name = _name,
             Nationality = _nationality
         };
+
+    public DirectorResponse ResponseBuild() =>
+        new(_name,
+            _birthDate,
+            _nationality);
+
+    public DirectorRequest RequestBuild() =>
+        new(_name,
+            _birthDate,
+            _nationality);
 
     public DirectorBuilder WithName(string name)
     {

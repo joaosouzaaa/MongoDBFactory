@@ -2,7 +2,7 @@
 
 public sealed class Movie
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required string Title { get; set; }
     public required string Genre { get; set; }
     public required int ReleaseYear { get; set; }

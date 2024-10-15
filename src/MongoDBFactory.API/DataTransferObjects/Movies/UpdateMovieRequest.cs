@@ -3,6 +3,7 @@
 namespace MongoDBFactory.API.DataTransferObjects.Movies;
 
 public sealed record UpdateMovieRequest(
+    Guid Id,
     string Title,
     string Genre,
     int ReleaseYear,
