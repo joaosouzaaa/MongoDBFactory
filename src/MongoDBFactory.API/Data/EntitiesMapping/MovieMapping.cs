@@ -12,10 +12,6 @@ public sealed class MovieMapping : BaseEntityMapping<Movie>
 
         classMap.MapIdField(m => m.Id);
 
-        var rn = classMap.AllMemberMaps;
-
-        var rm = classMap.DeclaredMemberMaps;
-
         classMap.MapProperty(m => m.Title)
             .SetIsRequired(true)
             .SetElementName("title");
@@ -27,5 +23,9 @@ public sealed class MovieMapping : BaseEntityMapping<Movie>
         classMap.MapProperty(m => m.ReleaseYear)
             .SetIsRequired(true)
             .SetElementName("release_year");
+
+        classMap.MapProperty(m => m.Director)
+            .SetIsRequired(true)
+            .SetElementName("director");
     }
 }
