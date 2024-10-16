@@ -1,6 +1,7 @@
 ﻿using MongoDBFactory.API.DataTransferObjects.Movies;
 using MongoDBFactory.API.Entities;
 using MongoDBFactory.API.Interfaces.Mappers;
+using MongoDBFactory.API.Settings.PaginationSettings;
 
 namespace MongoDBFactory.API.Mappers;
 
@@ -13,6 +14,19 @@ public sealed class MovieMapper(IDirectorMapper directorMapper) : IMovieMapper
             Genre = createMovieRequest.Genre,
             ReleaseYear = createMovieRequest.ReleaseYear,
             Director = directorMapper.RequestToDomain(createMovieRequest.Director)
+        };
+
+    public List<MovieResponse> DomainListToResponseList(List<Movie> movieList) =>
+        movieList.Select(DomainToResponse).ToList();
+
+    public PageList<MovieResponse> DomainPageListToResponsePageList(PageList<Movie> moviePageList) =>
+        new()
+        {
+            CurrentPage = moviePageList.CurrentPage,
+            PageSize = moviePageList.PageSize,
+            Result = DomainListToResponseList(moviePageList.Result),
+            TotalCount = moviePageList.TotalCount,
+            TotalPages = moviePageList.TotalPages
         };
 
     public MovieResponse DomainToResponse(Movie movie) =>

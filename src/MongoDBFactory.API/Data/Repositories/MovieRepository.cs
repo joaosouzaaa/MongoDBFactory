@@ -13,6 +13,9 @@ public sealed class MovieRepository(IMongoDatabase dbContext) : IMovieRepository
     public Task AddAsync(Movie movie, CancellationToken cancellationToken) =>
         _collection.InsertOneAsync(movie, cancellationToken: cancellationToken);
 
+    public Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken) =>
+        _collection.Find(m => m.Id == id).AnyAsync(cancellationToken);
+
     public Task DeleteAsync(Guid id, CancellationToken cancellationToken) =>
         _collection.DeleteOneAsync(m => m.Id == id, cancellationToken);
 

@@ -2,6 +2,7 @@
 using MongoDBFactory.API.Entities;
 using MongoDBFactory.API.Interfaces.Mappers;
 using MongoDBFactory.API.Mappers;
+using MongoDBFactory.API.Settings.PaginationSettings;
 using Moq;
 using UnitTests.TestBuilders;
 
@@ -36,6 +37,65 @@ public sealed class MovieMapperTests
         Assert.Equal(createMovieRequest.Title, movieResult.Title);
         Assert.Equal(createMovieRequest.Genre, movieResult.Genre);
         Assert.Equal(createMovieRequest.ReleaseYear, movieResult.ReleaseYear);
+    }
+
+    [Fact]
+    public void DomainListToResponseList_SuccessfulScenario_ReturnsResponseList()
+    {
+        // A
+        var movieList = new List<Movie>()
+        {
+            MovieBuilder.NewObject().DomainBuild(),
+            MovieBuilder.NewObject().DomainBuild(),
+            MovieBuilder.NewObject().DomainBuild()
+        };
+
+        var directorResponse = DirectorBuilder.NewObject().ResponseBuild();
+        _directorMapperMock.SetupSequence(d => d.DomainToResponse(
+            It.IsAny<Director>()))
+            .Returns(directorResponse)
+            .Returns(directorResponse)
+            .Returns(directorResponse);
+
+        // A
+        var movieResponseListResult = _movieMapper.DomainListToResponseList(movieList);
+
+        // A
+        Assert.Equal(movieList.Count, movieResponseListResult.Count);
+    }
+
+    [Fact]
+    public void DomainPageListToResponsePageList_SuccessfulScenario_ReturnsResponsePageList()
+    {
+        // A
+        var movieList = new List<Movie>()
+        {
+            MovieBuilder.NewObject().DomainBuild(),
+            MovieBuilder.NewObject().DomainBuild()
+        };
+        var moviePageList = new PageList<Movie>()
+        {
+            CurrentPage = 1,
+            PageSize = 11,
+            Result = movieList,
+            TotalCount = 12,
+            TotalPages = 13
+        };
+        var directorResponse = DirectorBuilder.NewObject().ResponseBuild();
+        _directorMapperMock.SetupSequence(d => d.DomainToResponse(
+            It.IsAny<Director>()))
+            .Returns(directorResponse)
+            .Returns(directorResponse);
+
+        // A
+        var movieResponsePageListResult = _movieMapper.DomainPageListToResponsePageList(moviePageList);
+
+        // A
+        Assert.Equal(moviePageList.CurrentPage, movieResponsePageListResult.CurrentPage);
+        Assert.Equal(moviePageList.PageSize, movieResponsePageListResult.PageSize);
+        Assert.Equal(moviePageList.Result.Count, movieResponsePageListResult.Result.Count);
+        Assert.Equal(moviePageList.TotalCount, movieResponsePageListResult.TotalCount);
+        Assert.Equal(moviePageList.TotalPages, movieResponsePageListResult.TotalPages);
     }
 
     [Fact]
