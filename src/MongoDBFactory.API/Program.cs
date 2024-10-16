@@ -15,6 +15,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseHttpsRedirection();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -24,7 +25,6 @@ else
 }
 
 app.UseCors(CorsPoliciesNamesConstants.CorsPolicy);
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
