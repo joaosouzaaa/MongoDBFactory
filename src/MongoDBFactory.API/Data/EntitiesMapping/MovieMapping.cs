@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson.Serialization;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDBFactory.API.Data.BaseMappings;
 using MongoDBFactory.API.Entities;
 
@@ -10,7 +12,8 @@ public sealed class MovieMapping : BaseEntityMapping<Movie>
     {
         classMap.AutoMap();
 
-        classMap.MapIdField(m => m.Id);
+        classMap.MapIdField(m => m.Id)
+            .SetSerializer(new GuidSerializer(GuidRepresentation.Standard));
 
         classMap.MapProperty(m => m.Title)
             .SetIsRequired(true)
